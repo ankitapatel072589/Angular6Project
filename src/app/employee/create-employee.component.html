@@ -1,0 +1,45 @@
+<div class="Container">
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="form-horizontal">
+    <div class="form-group">
+      <label> Create Employee</label>
+    </div>
+    <div class="form-group" [ngClass]="{'has-error': ((employeeForm.get('fullName').touched ||
+    employeeForm.get('fullName').dirty) &&
+    employeeForm.get('fullName').errors)}">
+      <label class="control-label" for="fullName">Full Name:</label>
+      <input type="text" class="form-control" id="fullName" formControlName="fullName">
+      <span class="help-block" *ngIf="((employeeForm.get('fullName').touched ||
+               employeeForm.get('fullName').dirty) &&
+               employeeForm.get('fullName').errors)">
+        <span *ngIf="employeeForm.get('fullName').errors.required">
+          Full Name is required
+        </span>
+        <span *ngIf="employeeForm.get('fullName').errors.minlength ||
+               employeeForm.get('fullName').errors.maxlength">
+          Full Name must be greater than 2 characters and less than 10 characters
+        </span>
+      </span>
+    </div>
+    <div class="form-group">
+      <label for="pwd">Email:</label>
+      <input type="email" class="form-control" id="email" formControlName="email">
+    </div>
+    <div formGroupName="skills">
+      <div class="form-group">
+        <label> Skills </label> 
+        <input type="text" id="skillName" formControlName="skillName">
+        <input type="text" id="expYear" formControlName="experienceInYears" placeholder="Experince in Years">
+      </div>
+      <div class="form-group">
+        <label>Proficiency</label>
+        <input type="radio" value="beginner" formControlName="proficiency"> Beginner
+        <input type="radio" value="intermediate" formControlName="proficiency"> Intermediate
+        <input type="radio" value="advanced" formControlName="proficiency"> Advanced
+      </div>
+    </div>
+    <div class="btn-toolbar">
+      <button type="submit" class="btn btn-default">Submit</button>
+      <button type="button" class="btn btn-default" (click)="onLoadDataClick()">Load Button</button>
+    </div>
+  </form>
+</div>
